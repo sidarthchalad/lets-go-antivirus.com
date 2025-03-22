@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Let Go Antivirus - No Entry Warning</title>
+  <style>
+    body {
+      background: linear-gradient(145deg, #000000, #1a1a1a);
+      color: #ff4c4c;
+      font-family: 'Arial Black', sans-serif;
+      text-align: center;
+      padding: 50px 20px;
+      margin: 0;
+    }
+
+    .warning {
+      font-size: 48px;
+      border: 5px solid #ff4c4c;
+      padding: 25px;
+      display: inline-block;
+      margin-bottom: 40px;
+      animation: pulse 1.5s infinite;
+      border-radius: 15px;
+      box-shadow: 0 0 20px red;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+
+    .form-container {
+      background-color: #121212;
+      padding: 30px;
+      border: 2px solid #ff4c4c;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(255, 76, 76, 0.5);
+    }
+
+    .form-container p {
+      margin: 0 0 15px 0;
+      font-size: 20px;
+      color: #f2f2f2;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 280px;
+      border: 2px solid #ff4c4c;
+      border-radius: 5px;
+      background-color: #000;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: #ff1a1a;
+      box-shadow: 0 0 8px red;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin-left: 10px;
+      background-color: #ff4c4c;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #ff1a1a;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 25px;
+      font-size: 22px;
+      color: #00ffcc;
+    }
+
+    .result.warning {
+      color: #ffaa00;
+    }
+
+    .result.success {
+      color: #00ff00;
+    }
+  </style>
+</head>
+<body>
+  <div class="warning">🚫 NO ENTRY - VIRUS ZONE 🚫</div>
+
+  <div class="form-container">
+    <p>Enter file name or URL to check for virus:</p>
+    <input type="text" id="inputField" placeholder="example.com or file.exe">
+    <button onclick="checkVirus()">Check</button>
+    <div class="result" id="resultArea"></div>
+  </div>
+
+  <script>
+    function checkVirus() {
+      const input = document.getElementById('inputField').value.trim();
+      const resultArea = document.getElementById('resultArea');
+
+      if (input === '') {
+        resultArea.className = 'result warning';
+        resultArea.textContent = "⚠️ Please enter a valid input!";
+        return;
+      }
+
+      resultArea.className = 'result';
+      resultArea.textContent = "🔍 Scanning...";
+
+      setTimeout(() => {
+        const isSafe = Math.random() > 0.2; // 80% chance it's safe
+        if (isSafe) {
+          resultArea.className = 'result success';
+          resultArea.textContent = `✅ No Virus Detected in '${input}'`;
+        } else {
+          resultArea.className = 'result warning';
+          resultArea.textContent = `❌ Virus Detected in '${input}'`;
+        }
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
